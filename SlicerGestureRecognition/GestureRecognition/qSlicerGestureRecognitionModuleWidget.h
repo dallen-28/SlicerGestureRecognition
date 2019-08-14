@@ -25,6 +25,7 @@
 
 class qSlicerGestureRecognitionModuleWidgetPrivate;
 class vtkMRMLNode;
+class vtkMRMLLinearTransformNode;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
 class Q_SLICER_QTMODULES_GESTURERECOGNITION_EXPORT qSlicerGestureRecognitionModuleWidget :
@@ -38,7 +39,10 @@ public:
   qSlicerGestureRecognitionModuleWidget(QWidget *parent=0);
   virtual ~qSlicerGestureRecognitionModuleWidget();
 
+
 public slots:
+
+	void OnPredictButtonClicked();
 
 
 protected:

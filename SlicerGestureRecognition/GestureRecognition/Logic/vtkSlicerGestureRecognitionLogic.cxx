@@ -57,6 +57,13 @@ void vtkSlicerGestureRecognitionLogic::SetMRMLSceneInternal(vtkMRMLScene * newSc
   events->InsertNextValue(vtkMRMLScene::EndBatchProcessEvent);
   this->SetAndObserveMRMLSceneEventsInternal(newScene, events.GetPointer());
 }
+void vtkSlicerGestureRecognitionLogic::StartPrediction(vtkMRMLLinearTransformNode* transformNode)
+{
+	// Attach observer to transformNode
+	//transformNode->AddObserver(vtkMRMLLinearTransformNode::TransformModifiedEvent)
+
+
+}
 
 //-----------------------------------------------------------------------------
 void vtkSlicerGestureRecognitionLogic::RegisterNodes()

@@ -28,11 +28,14 @@
 #include "vtkSlicerModuleLogic.h"
 
 // MRML includes
+#include "vtkMRMLLinearTransformNode.h"
 
 // STD includes
 #include <cstdlib>
 
 #include "vtkSlicerGestureRecognitionModuleLogicExport.h"
+
+class vtkMRMLLinearTransformNode;
 
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
@@ -45,6 +48,8 @@ public:
   vtkTypeMacro(vtkSlicerGestureRecognitionLogic, vtkSlicerModuleLogic);
   void PrintSelf(ostream& os, vtkIndent indent);
 
+	void StartPrediction(vtkMRMLLinearTransformNode *node);
+
 protected:
   vtkSlicerGestureRecognitionLogic();
   virtual ~vtkSlicerGestureRecognitionLogic();
@@ -55,7 +60,11 @@ protected:
   virtual void UpdateFromMRMLScene();
   virtual void OnMRMLSceneNodeAdded(vtkMRMLNode* node);
   virtual void OnMRMLSceneNodeRemoved(vtkMRMLNode* node);
+
+
 private:
+
+	void updateTransform();
 
   vtkSlicerGestureRecognitionLogic(const vtkSlicerGestureRecognitionLogic&); // Not implemented
   void operator=(const vtkSlicerGestureRecognitionLogic&); // Not implemented
