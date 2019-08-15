@@ -22,6 +22,7 @@
 #include "qSlicerAbstractModuleWidget.h"
 
 #include "qSlicerGestureRecognitionModuleExport.h"
+#include "vtkMRMLLinearTransformNode.h"
 
 class qSlicerGestureRecognitionModuleWidgetPrivate;
 class vtkMRMLNode;

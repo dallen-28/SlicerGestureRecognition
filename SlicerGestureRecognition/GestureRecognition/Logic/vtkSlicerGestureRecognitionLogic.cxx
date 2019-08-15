@@ -26,15 +26,24 @@
 #include <vtkNew.h>
 #include <vtkObjectFactory.h>
 
+
 // STD includes
 #include <cassert>
 
 //----------------------------------------------------------------------------
 vtkStandardNewMacro(vtkSlicerGestureRecognitionLogic);
 
+static void func(vtkObject *caller, unsigned long eid, void *clientdata, void *calldata);
+
 //----------------------------------------------------------------------------
 vtkSlicerGestureRecognitionLogic::vtkSlicerGestureRecognitionLogic()
 {
+	/*if (!dtwModel.load(":/Resources/DTWModel.grt"))
+	{
+		vtkErrorMacro("Failed to load DTW Model");
+	}*/
+	this->transformModifiedCallback = vtkSmartPointer<vtkCallbackCommand>::New();
+	this->transformModifiedCallback->SetCallback(func);
 }
 
 //----------------------------------------------------------------------------
@@ -60,9 +69,21 @@ void vtkSlicerGestureRecognitionLogic::SetMRMLSceneInternal(vtkMRMLScene * newSc
 void vtkSlicerGestureRecognitionLogic::StartPrediction(vtkMRMLLinearTransformNode* transformNode)
 {
 	// Attach observer to transformNode
-	//transformNode->AddObserver(vtkMRMLLinearTransformNode::TransformModifiedEvent)
+
+	vtkSmartPointer<vtkMatrix4x4> matr;
+	matr = transformNode->GetMatrixTransformFromParent();
+	int a = matr->GetElement(0, 3);
+	int b = matr->GetElement(1, 3);
+	int c = matr->GetElement(2, 3);
+
+	transformNode->AddObserver(vtkMRMLLinearTransformNode::TransformModifiedEvent, this->transformModifiedCallback);
 
 
+}
+
+static void func(vtkObject *caller, unsigned long eid, void* clientdata, void *calldata)
+{
+	int a = 1;
 }
 
 //-----------------------------------------------------------------------------

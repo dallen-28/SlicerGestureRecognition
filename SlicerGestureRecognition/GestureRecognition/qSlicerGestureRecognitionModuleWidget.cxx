@@ -84,10 +84,14 @@ void qSlicerGestureRecognitionModuleWidget::setup()
 
 
 	// Wire up transform nodes to dropdown
-	d->transformDropDown->setNodeTypes(QStringList::fromStdList({ "vtkMRMLLinearTransformNode" }));
+	d->transformDropDown->setNodeTypes(QStringList() << (QString)"vtkMRMLLinearTransformNode");
 	d->transformDropDown->setSelectNodeUponCreation(true);
+	d->transformDropDown->setAddEnabled(false);
+	d->transformDropDown->setRemoveEnabled(false);
+	d->transformDropDown->setNoneEnabled(false);
+	this->setMRMLScene(d->logic()->GetMRMLScene());
 	d->transformDropDown->setMRMLScene(this->mrmlScene());
-	d->transformDropDown->setToolTip("Pick a transform to observe");
+	d->transformDropDown->setToolTip("Pick a transform to observe1");
 	
 
 	connect(d->pushButton, SIGNAL(clicked()), this, SLOT(OnPredictButtonClicked()));
